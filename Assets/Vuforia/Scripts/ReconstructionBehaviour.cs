@@ -11,5 +11,6 @@ namespace Vuforia
     /// </summary> 
     public class ReconstructionBehaviour : ReconstructionAbstractBehaviour
     {
+     
     }
 }

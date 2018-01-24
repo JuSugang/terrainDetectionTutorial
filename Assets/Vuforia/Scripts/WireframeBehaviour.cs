@@ -52,7 +52,7 @@ namespace Vuforia
             }
         }
 
-        void OnRenderObject ()
+        void OnRenderObject()
         {
             // avoid lines being rendered in Background-camera
             GameObject go = VuforiaManager.Instance.ARCameraTransform.gameObject;
@@ -60,41 +60,42 @@ namespace Vuforia
             bool valid = false;
             foreach (Camera cam in cameras)
             {
-                if(Camera.current == cam)
+                if (Camera.current == cam)
                     valid = true;
             }
-            if(!valid)
+            if (!valid)
                 return;
-        
+
             if (!ShowLines) return;
 
             var mf = GetComponent<MeshFilter>();
             if (!mf) return;
 
 
-            if (mLineMaterial == null) 
+            if (mLineMaterial == null)
             {
-                Debug.LogWarning ("Missing line material for wireframe rendering!");
+                Debug.LogWarning("Missing line material for wireframe rendering!");
                 return;
             }
 
             var mesh = mf.sharedMesh;
             var vertices = mesh.vertices;
             var triangles = mesh.triangles;
-    
+
             GL.PushMatrix();
             GL.MultMatrix(transform.localToWorldMatrix);
 
             mLineMaterial.SetPass(0);
-            mLineMaterial.SetColor ("_Color", LineColor);
+            mLineMaterial.SetColor("_Color", LineColor);
 
-            GL.Begin(GL.LINES); 
-            for (int i=0; i<triangles.Length; i+=3) {
+            GL.Begin(GL.LINES);
+            for (int i = 0; i < triangles.Length; i += 3)
+            {
 
-                var P0 = (vertices[triangles[i+0]]);
-                var P1 = (vertices[triangles[i+1]]);
-                var P2 = (vertices[triangles[i+2]]);
-            
+                var P0 = (vertices[triangles[i + 0]]);
+                var P1 = (vertices[triangles[i + 1]]);
+                var P2 = (vertices[triangles[i + 2]]);
+
                 GL.Vertex(P0);
                 GL.Vertex(P1);
                 GL.Vertex(P1);
@@ -102,7 +103,7 @@ namespace Vuforia
                 GL.Vertex(P2);
                 GL.Vertex(P0);
             }
-    
+
             GL.End();
             GL.PopMatrix();
         }

@@ -7,7 +7,7 @@ Confidential and Proprietary - Protected under copyright and other laws.
 ==============================================================================*/
 
 using UnityEngine;
-
+//ARCamera 역할을 하는 스크립트
 namespace Vuforia
 {
     /// <summary>
